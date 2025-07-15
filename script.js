@@ -7,22 +7,30 @@ function addTask() {
     const taskText = taskInput.value.trim();
 
     if (taskText !== "") {
+        const preco = prompt("Digite o preço do produto: ")
 
+            if(preco === null || preco.trim() === ""){
+                alert("Preço não informado. O produto não foi adicionado.");
+                return;
+            }   
+
+        
         const maxText = taskText.substring(0, 35);
-
         const li = document.createElement("li");
 
         li.innerHTML = `
 
-            <span>${maxText}</span>
+            
+            <span>${maxText}</strong></span><br>
+            <span>- R$${preco}</span>
             <button class="editButton" onclick="editTask(this)">Editar</button>
             <button class="deleteButton" onclick="deleteTask(this)">Remover</button>
         `;
 
-        taskList.appendChild(li);
+        taskList.appendChild(li);      
         taskInput.value = "";
     }
-}
+} 
 
 
 
