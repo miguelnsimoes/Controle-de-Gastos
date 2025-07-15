@@ -1,5 +1,5 @@
 body{
-    background-color: #2e204b;
+    background-color: #0f0327;
     color: #fff;
     font-family: Roboto, sans-serif;
     margin: 0;
@@ -13,6 +13,20 @@ body{
     background-color: #3f2b68;
     border-radius: 10px;
 }
+
+.gasto {
+    padding: 15px;
+    background-color: #5a3c94;
+    border-radius: 10px;
+    margin-bottom: 25px; 
+    text-align: center;
+}
+
+.gasto #gasto {
+    font-size: 1.5em; 
+    font-weight: bold;
+}
+
 
 h1{
     text-align: center;
@@ -67,3 +81,5 @@ li .editButton
 li.deleteButton{
     margin-left: 5px;
 }
+
+

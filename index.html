@@ -10,11 +10,19 @@
 <body>
     
     <div class="container">
+        
         <h1>Controle de Gastos</h1>
-        <input type="text" id="taskInput" placeholder="Adicione um Gasto">
+        <div class="gasto">
+            <h1>Total de Gastos</h1>
+            <span id="gasto">R$ 0,00</span>
+        </div>
+
+        <input type="text" id="taskInput" placeholder="Com o que você gastou?">
         <button onclick="addTask()">Adicionar</button>
         <ul id="taskList"></ul>
     </div>
+
+
 
     <script src="script.js"></script>
 
