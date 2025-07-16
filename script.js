@@ -14,6 +14,14 @@ function addTask() {
                 return;
             }   
 
+            const precoNumero = parseFloat(preco.replace(",", "."));
+
+            if(isNaN(precoNumero)|| precoNumero < 0){
+                alert("Digite um valor numérico válido e positivo para o preço.");
+                return;
+            }
+
+
         
         const maxText = taskText.substring(0, 35);
         const li = document.createElement("li");
@@ -22,7 +30,7 @@ function addTask() {
 
             
             <span>${maxText}</strong></span><br>
-            <span>- R$${preco}</span>
+            <span>- R$${precoNumero.toFixed(2).replace(".", ",")}</span>
             <button class="editButton" onclick="editTask(this)">Editar</button>
             <button class="deleteButton" onclick="deleteTask(this)">Remover</button>
         `;
@@ -60,10 +68,24 @@ function editTask(button) {
     // Cria botão para editar o preço
     const editPriceBtn = document.createElement("button");
     editPriceBtn.textContent = "Editar Preço";
+
     editPriceBtn.onclick = function () {
+
         const novoPreco = prompt("Novo preço:", precoSpan.textContent.replace("- R$", "").trim());
+
+        
         if (novoPreco !== null && novoPreco.trim() !== "") {
-            precoSpan.textContent = `- R$${novoPreco.trim()}`;
+            const novoPrecoNumerico = parseFloat(novoPreco.replace(",", "."));
+
+            if(isNaN(novoPrecoNumerico) || novoPrecoNumerico < 0){
+                alert("Digite um valor numérico válido e positivo para o preço.");
+                restoreButtons(li);
+                return;
+
+            }
+
+            precoSpan.textContent = `- R$${novoPrecoNumerico.toFixed(2).replace(".", ",")}`;
+            atualizarTotal();
         }
         restoreButtons(li);
     };
@@ -107,3 +129,24 @@ function deleteTask(button){
 
 }
 
+
+
+
+function atualizarTotal(){
+    const spansDePreco = taskList.querySelectorAll("li span:nth-child(2)");
+    let total = 0;
+
+    spansDePreco.forEach(span => {
+        const texto = span.textContent.replace("- R$", "").replace(",", ".").trim();
+        const valor = parseFloat(texto);
+
+        if(!isNaN(valor)){
+            total += valor;
+        }
+
+    });
+
+    const spanGasto = document.getElementById("gasto");
+    spanGasto.textContent = `R$ ${total.toFixed(2).replace(".", ",")}`;
+
+}
